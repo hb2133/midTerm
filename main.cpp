@@ -1,4 +1,7 @@
 #include <SDL.h>
+#include "Game.h"
+
+Game* g_game = 0;
 
 SDL_Window* g_pWindow = 0;
 SDL_Renderer* g_pRenderer = 0;
@@ -30,21 +33,15 @@ void render()
 
 int main(int argc, char* args[])
 {
-  if(init("Breaking Up HelloSDL",
-  SDL_WINDOWPOS_CENTERED,
-  SDL_WINDOWPOS_CENTERED,
-  640,480,SDL_WINDOW_SHOWN))
+  g_game = new Game();
+  g_game -> init("Game Class",100,100,640,480,0);
+  while(g_game->running())
   {
-    g_bRunning = true;
+    g_game->handleEvents();
+    g_game->update();
+    g_game->render();
   }
-  else{
-    return 1;
-  }
-  while(g_bRunning)
-  {
-    render();
-  }
-    SDL_Quit();
+  g_game->clean();
 
     return 0;
 }
