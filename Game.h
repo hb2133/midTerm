@@ -1,9 +1,8 @@
 #ifndef __Game__
 #define __Game__
 #include "SDL.h"
-#include "TextureManager.h"
-#include "GameObject.h"
 #include "Player.h"
+#include "Enemy.h"
 #include <vector>
 
 class Game{
@@ -28,16 +27,13 @@ class Game{
     void clean();
 
   private:
-      Game(){}
-      static Game* s_pInstance;
+    Game(){}
+    static Game* s_pInstance;
+      
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
     bool m_bRunning;
-
-    int m_currentFrame;
-
-    GameObject m_go;
-    Player m_player;
+    
     std::vector<GameObject*> m_gameObjects;
 };
 
